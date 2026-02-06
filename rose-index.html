@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day 🌹</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Arial', cursive;
+    height: 100vh;
+    overflow: hidden;
+    background: url("https://images.unsplash.com/photo-1509042239860-f550ce710b93")
+        no-repeat center center/cover;
+}
+
+/* Soft overlay */
+body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 235, 240, 0.85);
+    z-index: 0;
+}
+
+/* Border */
+.border {
+    position: absolute;
+    inset: 15px;
+    border: 10px solid #ff4d6d;
+    border-radius: 25px;
+    box-shadow: 0 0 25px rgba(255, 77, 109, 0.6);
+    z-index: 1;
+}
+
+/* Card */
+.card {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.6rem;
+    color: #b3002d;
+    text-shadow: 2px 2px 6px #ffccd5;
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 30px;
+}
+
+button {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #ff2f68;
+    color: white;
+}
+
+#yesBtn:hover {
+    background: #c9184a;
+}
+
+#noBtn {
+    background: white;
+    color: #ff2f68;
+    border: 2px solid #ff2f68;
+}
+
+/* Celebration */
+#celebration {
+    position: absolute;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(255,255,255,0.9);
+    z-index: 5;
+}
+
+#celebration h2 {
+    color: #c9184a;
+    font-size: 2.4rem;
+}
+
+.bouquet {
+    font-size: 5rem;
+    animation: pop 1.2s ease infinite alternate;
+}
+
+/* Rose petals */
+.petal {
+    position: absolute;
+    top: -50px;
+    font-size: 30px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes pop {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+/* Popup */
+#popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.popup-box {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.popup-box h3 {
+    color: #c9184a;
+}
+
+.popup-box button {
+    background: #ff2f68;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="border"></div>
+
+<div class="card">
+    <h1>
+        Mr. Tarun Bhushan,<br>
+        Happy Rose Day 🌹<br>
+        Will you accept these roses from me? ❤️
+    </h1>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 💐</button>
+        <button id="noBtn">No 😏</button>
+    </div>
+</div>
+
+<!-- Celebration -->
+<div id="celebration">
+    <div class="bouquet">💐🌹🌹💐</div>
+    <h2>Forever Yours 🌹❤️</h2>
+    <p>You are my favourite rose!</p>
+</div>
+
+<!-- No Popup -->
+<div id="popup">
+    <div class="popup-box">
+        <h3>😌 Excuse me!</h3>
+        <p>I am your wife 💍<br><strong>Roses are compulsory 😘🌹</strong></p>
+        <button onclick="closePopup()">Okay Okay 😅</button>
+    </div>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const celebration = document.getElementById("celebration");
+const popup = document.getElementById("popup");
+
+yesBtn.addEventListener("click", () => {
+    celebration.style.display = "flex";
+    startPetals();
+});
+
+noBtn.addEventListener("click", () => {
+    popup.style.display = "flex";
+});
+
+function closePopup() {
+    popup.style.display = "none";
+}
+
+/* Falling Rose Petals */
+function startPetals() {
+    setInterval(() => {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        petal.innerText = "🌹";
+        petal.style.left = Math.random() * window.innerWidth + "px";
+        petal.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(petal);
+
+        setTimeout(() => petal.remove(), 6000);
+    }, 300);
+}
+</script>
+
+</body>
+</html>
